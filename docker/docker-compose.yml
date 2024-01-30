@@ -6,21 +6,10 @@ services:
       context: ..
       dockerfile: docker/Dev.Dockerfile
     env_file: ../.env
-    environment:
-      - SQS_ENDPOINT_URL=http://${PROJECT_NAME}-elasticmq:9324
     volumes:
       - ..:/usr/src/app
       - venvs:/venvs
       - app_volume:/usr/src/circleci
-    depends_on:
-      - elasticmq
-
-  elasticmq:
-    container_name: "${PROJECT_NAME}-elasticmq"
-    image: softwaremill/elasticmq-native
-    ports:
-      - 9324:9324
-      - 9325:9325
 
 volumes:
   app_volume:
