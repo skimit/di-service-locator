@@ -1,0 +1,13 @@
+version: 2
+updates:
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    commit-message:
+      # Prefix all commit messages with "GHM-00"
+      prefix: "GHM-00"
+    reviewers:
+      - "skimit/engineers"
+    insecure-external-code-execution: allow
+    open-pull-requests-limit: 2
