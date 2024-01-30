@@ -16,7 +16,6 @@ include = [
 [tool.poetry.dependencies]
 python = "^3.9"
 di-logging = "^0.1.2"
-urllib3 = "1.26.18"  # Ugly hack to work around poetry bug
 boto3 = {version = "^1.20.24", optional = true}
 botocore = {version = "^1.23.24", optional = true}
 google-cloud-storage = {version = "^2.5.0", optional = true}
@@ -33,6 +32,7 @@ pytest-ruff = "^0.2.1"
 ruff = "^0.1.14"
 taskipy = "^1.2.0"
 typing-extensions = "^4.9.0"
+urllib3 = "1.26.18"  # Ugly hack to work around poetry bug
 
 [tool.poetry.extras]
 gcp = ["google-cloud-storage"]
