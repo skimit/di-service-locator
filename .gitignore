@@ -114,8 +114,5 @@ venv.bak/
 # macOS
 .DS_Store
 
-# poetry lock file as this is a library
-poetry.lock
-
 # ruff cache
 .ruff_cache
