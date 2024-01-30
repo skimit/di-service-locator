@@ -1,0 +1,9 @@
+{
+    "version": 1,
+    "features": {
+        "instrument": {
+            "factory": "di_service_locator.feature_defs.instrumentation.BasicLogInstrument",
+            "implements": "di_service_locator.feature_defs.interfaces.Instrumentation"
+        }
+    }
+}

@@ -1,0 +1,103 @@
+version: 2.1
+
+orbs:
+  circleci-orb: skimit/circleci-orb@1
+
+jobs:
+  get-current-version:
+    executor: circleci-orb/base-executor
+    steps:
+      - circleci-orb/get-current-version:
+          pipeline-number: << pipeline.number >>
+  generate-version:
+    executor: circleci-orb/base-executor
+    steps:
+      - circleci-orb/generate-version:
+          pipeline-number: << pipeline.number >>
+  execute-tests:
+    executor: circleci-orb/machine-executor
+    steps:
+      - circleci-orb/execute-tests:
+          pipeline-number: << pipeline.number >>
+          checksum-file: pyproject.toml
+  analyze-code:
+    executor: circleci-orb/machine-executor
+    steps:
+      - circleci-orb/analyze-code:
+          pipeline-number: << pipeline.number >>
+  build-package:
+    executor: circleci-orb/python-executor
+    steps:
+      - circleci-orb/build-package
+  push-package-pypi:
+    executor: circleci-orb/python-executor
+    steps:
+      - circleci-orb/push-package-pypi:
+          pipeline-number: << pipeline.number >>
+  generate-changelog:
+    executor: circleci-orb/base-executor
+    steps:
+      - circleci-orb/generate-changelog:
+          pipeline-number: << pipeline.number >>
+  create-github-release:
+    executor: circleci-orb/base-executor
+    steps:
+      - circleci-orb/create-github-release:
+          pipeline-number: << pipeline.number >>
+
+workflows:
+  workflow:
+    jobs:
+      - get-current-version:
+          context:
+            - org-global
+      - generate-version:
+          context:
+            - org-global
+          requires:
+            - get-current-version
+      - execute-tests:
+          context:
+            - org-global
+          requires:
+            - get-current-version
+            - generate-version
+      - analyze-code:
+          context:
+            - org-global
+          requires:
+            - execute-tests
+      - build-package:
+          context:
+            - org-global
+          requires:
+            - generate-version
+      - push-package-pypi:
+          context:
+            - org-global
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - build-package
+            - execute-tests
+      - generate-changelog:
+          context:
+            - org-global
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - execute-tests
+            - build-package
+      - create-github-release:
+          context:
+            - org-global
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - generate-changelog

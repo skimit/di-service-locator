@@ -1,0 +1,98 @@
+[tool.poetry]
+name = "di-service-locator"
+version = "0"
+description = "Injection utilities to obtain instances of dynamically created features from config"
+authors = []
+license = "MIT"
+readme = "README.md"
+homepage = "https://deeperinsights.com"
+repository = "https://github.com/skimit/di-service-locator"
+include = [
+    { path = "LICENSE", format = ["sdist", "wheel"] },
+    { path = "README.md", format = "sdist" },
+    { path = "tests", format = "sdist" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+di-logging = "^0.1.2"
+boto3 = {version = "^1.20.24", optional = true}
+botocore = {version = "^1.23.24", optional = true}
+google-cloud-storage = {version = "^2.5.0", optional = true}
+
+[tool.poetry.group.dev.dependencies]
+boto3-stubs = {extras = ["s3"], version = "^1.20.45"}
+gcp-storage-emulator = "2022.6.11"
+google-cloud-storage = "^2.5.0"
+moto = "4.2.6"
+pyright = "^1.1.349"
+pytest = "^7.1.2"
+pytest-cov = "^4.0.0"
+pytest-ruff = "^0.2.1"
+ruff = "^0.1.14"
+taskipy = "^1.2.0"
+typing-extensions = "^4.9.0"
+urllib3 = "1.26.18"  # Ugly hack to work around poetry bug
+
+[tool.poetry.extras]
+gcp = ["google-cloud-storage"]
+aws = ["boto3", "botocore"]
+
+[tool.taskipy.tasks]
+# Coverage runs all tests & checks - used in CI
+coverage = "pyright . && pytest --ruff --ruff-format -ra -v --cov=. --cov-report=xml:test-coverage.xml --cov-fail-under=70 --maxfail=3 --junitxml=test-results.xml"
+debug = "python -m debugpy --listen 0.0.0.0:5678 --wait-for-client /usr/local/bin/pytest"
+format = "ruff format -n . && ruff check -n --fix ."
+test = "pytest --ruff --ruff-format --cache-clear -ra -v"
+typecheck = "pyright ."
+
+[tool.pyright]
+include = ["di_service_locator"]
+exclude = [  # Do not process these files
+    "**/node_modules",
+    "**/__pycache__",
+    ".venv/**",
+]
+defineConstant = { DEBUG = true }
+ignore = ["tests"]  # Process these files, but ignore errors
+# stubPath = "src/stubs"
+reportMissingImports = true
+reportMissingTypeStubs = false
+pythonVersion = "3.9"
+pythonPlatform = "Linux"
+executionEnvironments = [{ root = "di_service_locator" }]
+
+[tool.ruff]
+select = ["E", "F", "D", "I"]
+# Docstring Ignores:
+# D100 - Missing docstring in public module
+# D102 - Missing docstring in public method
+# D103 - Missing docstring in public function
+# D104 - Missing docstring in public package
+# D105 - Missing docstring in magic method
+# D107 - Missing docstring in __init__
+# D202 - No blank lines allowed after function docstring
+# D203 - 1 blank line required before class docstring
+# D213 - Multi-line docstring summary should start at the first line
+# D400 - First line should end with a period
+# D401 - First line should be in imperative mood
+# D406 - Section name should end with a newline
+# D407 - Missing dashed underline after section
+# D413 - Missing blank line after last section
+# D415 - First line should end with a period, question mark, or exclamation point
+ignore = ["D100", "D102", "D103", "D104", "D105", "D107", "D202", "D203", "D212", "D400", "D401", "D406", "D407", "D413", "D415"]
+line-length = 95
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.ruff.lint.isort]
+known-first-party = ["di_service_locator"]
+section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
