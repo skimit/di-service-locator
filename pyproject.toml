@@ -5,6 +5,8 @@ description = "Injection utilities to obtain instances of dynamically created fe
 authors = []
 license = "MIT"
 readme = "README.md"
+homepage = "https://deeperinsights.com"
+repository = "https://github.com/skimit/di-logging"
 include = [
     { path = "LICENSE", format = ["sdist", "wheel"] },
     { path = "README.md", format = "sdist" },
