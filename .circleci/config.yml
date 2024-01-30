@@ -101,4 +101,3 @@ workflows:
                 - master
           requires:
             - generate-changelog
-            - push-package
