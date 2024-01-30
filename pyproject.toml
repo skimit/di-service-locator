@@ -15,10 +15,10 @@ include = [
 
 [tool.poetry.dependencies]
 python = "^3.9"
-di-logging = "^0.1.0"
-google-cloud-storage = {version = "^2.5.0", optional = true}
+di-logging = "^0.1.2"
 boto3 = {version = "^1.20.24", optional = true}
 botocore = {version = "^1.23.24", optional = true}
+google-cloud-storage = {version = "^2.5.0", optional = true}
 
 [tool.poetry.group.dev.dependencies]
 boto3-stubs = {extras = ["s3"], version = "^1.20.45"}
