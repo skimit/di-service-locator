@@ -1,3 +1,7 @@
+# -=- encoding: utf-8 -=-
+#
+# Copyright (c) 2024 Deeper Insights. Subject to the MIT license.
+
 """Module containing useful utility functions to transcode streams on the fly."""
 import codecs
 from typing import IO, cast
