@@ -122,6 +122,8 @@ Execute `make run` and your application should be running.
 
 Execute `make stop-dependencies` when you no longer need to execute your project.
 
+Execute `make sync-requirements` to rebuild the docker image.
+
 ## How to know which `make` recipes are available
 
 Run `make`
