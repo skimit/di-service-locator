@@ -137,7 +137,7 @@ endif
 sync-requirements:	### Syncs the installed dependencies with the ones defined on requirements.txt. This will delete project's main Docker image and rebuild it again
 ifeq ($(strip $(PROJECT_INSTANCES)),0)
 	$(call ANNOUNCEMENT,Syncing project requirements...)
-	@docker image rm $(PROJECT_MAIN_DOCKER_IMAGE)
+	@docker image rm $(PROJECT_MAIN_DOCKER_IMAGE) 2> /dev/null || true
 	@PROJECT_NAME=$(PROJECT_NAME) PORT=$(PORT) POETRY_LOCK_HASH=$(POETRY_LOCK_HASH) docker compose -p $(PROJECT_NAME) -f docker/docker-compose.yml build
 else
 	$(call ANNOUNCEMENT,Error syncing $(PROJECT_NAME) requirements. Please stop all running dependencies and try again.)
