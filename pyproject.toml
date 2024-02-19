@@ -24,7 +24,7 @@ google-cloud-storage = {version = "^2.5.0", optional = true}
 boto3-stubs = {extras = ["s3"], version = "^1.20.45"}
 gcp-storage-emulator = "2022.6.11"
 google-cloud-storage = "^2.5.0"
-moto = "4.2.6"
+moto = "5.0.2"
 pyright = "^1.1.349"
 pytest = "^8.0.0"
 pytest-cov = "^4.0.0"
