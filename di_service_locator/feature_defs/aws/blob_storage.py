@@ -95,16 +95,21 @@ class AwsBucketBlobStorage(BlobStorage):
         namespace: Optional[str] = None,
         anonymous: bool = False,
         creds_name: Optional[str] = None,
+        endpoint_url: Optional[str] = None,
     ) -> None:
         if not anonymous:
             AwsBucketBlobStorage._init_env(creds_name)
         self._bucket_name = bucket_name
 
+        if endpoint_url:
+            self._client = boto3.Session().resource(
+                "s3", endpoint_url = endpoint_url)
         # If we want to use a different profile ->
         #   boto3.Session(profile_name="profile dev").resource
-        self._client = boto3.Session().resource(
-            "s3", config=Config(signature_version=UNSIGNED) if anonymous else None
-        )
+        else:
+            self._client = boto3.Session().resource(
+                "s3", config=Config(signature_version=UNSIGNED) if anonymous else None
+            )
 
         # sanitise prefix to remove leading / if there is one
         self._prefix = AwsBucketBlobStorage._sanitise(namespace)
