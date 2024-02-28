@@ -102,8 +102,7 @@ class AwsBucketBlobStorage(BlobStorage):
         self._bucket_name = bucket_name
 
         if endpoint_url:
-            self._client = boto3.Session().resource(
-                "s3", endpoint_url = endpoint_url)
+            self._client = boto3.Session().resource("s3", endpoint_url=endpoint_url)
         # If we want to use a different profile ->
         #   boto3.Session(profile_name="profile dev").resource
         else:
