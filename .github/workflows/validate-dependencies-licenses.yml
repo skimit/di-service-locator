@@ -8,4 +8,4 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Python Dependency License Checker
-        uses: skimit/pypi-license-checker-github-action@v1.2.3
+        uses: skimit/pypi-license-checker-github-action@v1.2.5
