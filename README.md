@@ -41,7 +41,7 @@ An example of this json file;
     "version": 1,
     "features": {
         "blob_storage": {
-            "factory": "di_service_locator.feature_defs.blob_storeage.FileBlobStorage",
+            "factory": "di_service_locator.feature_defs.blob_storage.FileBlobStorage",
             "implements": "di_service_locator.feature_defs.interfaces.BlobStorage",
             "args": [],
             "kwargs": {
@@ -65,7 +65,7 @@ To facilitate this need the `features.json` file supports property resolution on
     "version": 1,
     "features": {
         "blob_storage": {
-            "factory": "di_service_locator.feature_defs.blob_storeage.FileBlobStorage",
+            "factory": "di_service_locator.feature_defs.blob_storage.FileBlobStorage",
             "implements": "di_service_locator.feature_defs.interfaces.BlobStorage",
             "args": [],
             "kwargs": {
