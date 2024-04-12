@@ -29,7 +29,7 @@ pyright = "^1.1.349"
 pytest = "^8.0.0"
 pytest-cov = "^4.0.0"
 pytest-ruff = "^0.2.1"
-ruff = "^0.1.14"
+ruff = ">=0.1.14,<0.4.0"
 taskipy = "^1.2.0"
 typing-extensions = "^4.9.0"
 urllib3 = "1.26.18"  # Ugly hack to work around poetry bug
