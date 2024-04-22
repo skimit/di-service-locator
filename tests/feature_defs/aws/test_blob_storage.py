@@ -11,7 +11,7 @@ from typing import Type
 
 import boto3
 import pytest
-from moto import mock_s3
+from moto import mock_aws
 
 from di_service_locator.feature_defs.aws.blob_storage import (
     AwsBucketBlobStorage,
@@ -33,7 +33,7 @@ def _create_server():
     os.environ["AWS_SESSION_TOKEN"] = "testing"
 
     try:
-        mock = mock_s3()
+        mock = mock_aws()
         mock.start()
 
         try:
