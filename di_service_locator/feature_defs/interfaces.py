@@ -8,6 +8,7 @@ Contains common, simple service interface definitions.
 It is not a requirement that all service definitions go in here, but it is a useful place
 for most of them.
 """
+
 import abc
 from datetime import datetime
 from typing import IO, ContextManager, Generator, Iterable

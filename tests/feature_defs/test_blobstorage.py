@@ -3,6 +3,7 @@
 # Copyright (c) 2024 Deeper Insights. Subject to the MIT license.
 
 """Explicit tests for `FileBlobStorage` implementation."""
+
 import dataclasses
 import io
 import json

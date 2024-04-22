@@ -3,6 +3,7 @@
 # Copyright (c) 2024 Deeper Insights. Subject to the MIT license.
 
 """Contains concrete instrumentation implementations."""
+
 import functools
 from collections import defaultdict
 from contextlib import contextmanager

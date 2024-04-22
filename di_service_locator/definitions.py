@@ -3,6 +3,7 @@
 # Copyright (c) 2024 Deeper Insights. Subject to the MIT license.
 
 """Feature dataclasses and types."""
+
 import abc
 import dataclasses
 from typing import Collection, Mapping, Sequence, Tuple, Union
