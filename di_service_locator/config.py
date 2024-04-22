@@ -3,6 +3,7 @@
 # Copyright (c) 2024 Deeper Insights. Subject to the MIT license.
 
 """Classes and functions to create factory maps from config."""
+
 import json
 import os
 import pathlib

@@ -3,6 +3,7 @@
 # Copyright (c) 2024 Deeper Insights. Subject to the MIT license.
 
 """Reusable functions for dynamically loading and instantiating classes."""
+
 import importlib
 from typing import Type, TypeVar
 

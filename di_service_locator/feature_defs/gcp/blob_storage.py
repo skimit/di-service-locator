@@ -8,6 +8,7 @@ Google cloud bucket blob storage implementation of BlobStorage.
 Sadly the python API doesn't support streaming so we occasionally have to buffer data
 in memory.
 """
+
 import contextlib
 import io
 import os

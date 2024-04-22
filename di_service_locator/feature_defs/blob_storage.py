@@ -3,6 +3,7 @@
 # Copyright (c) 2024 Deeper Insights. Subject to the MIT license.
 
 """Module for basic blob storage implementations."""
+
 import contextlib
 from pathlib import Path
 from typing import IO, Generator, Tuple

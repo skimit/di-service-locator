@@ -3,6 +3,7 @@
 # Copyright (c) 2024 Deeper Insights. Subject to the MIT license.
 
 """Features injector and service locator module."""
+
 import os
 import threading
 from typing import Any, Optional, Type, TypeVar

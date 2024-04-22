@@ -3,6 +3,7 @@
 # Copyright (c) 2024 Deeper Insights. Subject to the MIT license.
 
 """Some file utilities."""
+
 from pathlib import Path
 from typing import Sequence
 

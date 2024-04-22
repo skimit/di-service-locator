@@ -3,6 +3,7 @@
 # Copyright (c) 2024 Deeper Insights. Subject to the MIT license.
 
 """Tests for config functions and property resolution."""
+
 import os
 import sys
 from unittest.mock import patch

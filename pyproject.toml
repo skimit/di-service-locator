@@ -63,7 +63,7 @@ pythonPlatform = "Linux"
 executionEnvironments = [{ root = "di_service_locator" }]
 
 [tool.ruff]
-select = ["E", "F", "D", "I"]
+lint.select = ["E", "F", "D", "I"]
 # Docstring Ignores:
 # D100 - Missing docstring in public module
 # D102 - Missing docstring in public method
@@ -80,7 +80,7 @@ select = ["E", "F", "D", "I"]
 # D407 - Missing dashed underline after section
 # D413 - Missing blank line after last section
 # D415 - First line should end with a period, question mark, or exclamation point
-ignore = ["D100", "D102", "D103", "D104", "D105", "D107", "D202", "D203", "D212", "D400", "D401", "D406", "D407", "D413", "D415"]
+lint.ignore = ["D100", "D102", "D103", "D104", "D105", "D107", "D202", "D203", "D212", "D400", "D401", "D406", "D407", "D413", "D415"]
 line-length = 95
 
 [tool.ruff.format]
