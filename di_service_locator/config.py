@@ -121,6 +121,7 @@ class PropertyResolver:
             for resolver in self._providers:
                 value = resolver(property_value)
                 if value:
+                    # early return if we've resolved a property
                     return value
             if property_default_found:
                 ret = property_default
