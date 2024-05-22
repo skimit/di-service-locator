@@ -90,6 +90,7 @@ class PropertyResolver:
         )
 
     def _resolve_property(self, property_value: str) -> Optional[str]:
+        ret: Optional[str] = property_value
         if PropertyResolver._is_property(property_value):
             property_name = property_value[len(PROPERTY_IDENTIFIER) :]
             property_default = None
@@ -106,10 +107,10 @@ class PropertyResolver:
                 if value:
                     return value
             if property_default_found:
-                property_value = property_default
+                ret = property_default
             else:
                 raise FeatureConfigError(f"No property value found for {property_value}")
-        return property_value
+        return ret
 
     def resolve(self, factory_definition: FactoryDefinition) -> FactoryDefinition:
         """
