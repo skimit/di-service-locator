@@ -20,7 +20,12 @@ def _mock_factory_definition():
         fqn_impl_factory="dummy",
         fqn_interface="dummy",
         args=[1, "$PROPERTY1", 3],
-        kwargs={"key": "value", "key2": "$PROPERTY2", "key3": "$PROPERTY3=default_value"},
+        kwargs={
+            "key": "value",
+            "key2": "$PROPERTY2",
+            "key3": "$PROPERTY3=default_value",
+            "key4": "$PROPERTY4=",
+        },
     )
 
 
@@ -30,13 +35,19 @@ def test_property_resolver__args(mock_factory_definition):
     with patch.object(sys, "argv", testargs):
         result = STANDARD_PROPERTY_RESOLVER.resolve(mock_factory_definition)
         assert result.args == [1, "testvalue1", 3]
-        assert result.kwargs == {"key": "value", "key2": "testvalue2", "key3": "default_value"}
+        assert result.kwargs == {
+            "key": "value",
+            "key2": "testvalue2",
+            "key3": "default_value",
+            "key4": None,
+        }
 
 
 def test_property_resolver__env(mock_factory_definition):
     """Test that properties can be extracted from environment variables."""
     os.environ["PROPERTY1"] = "envtestvalue1"
     os.environ["PROPERTY2"] = "envtestvalue2"
+    os.environ["PROPERTY4"] = "hasavalue"
     try:
         result = STANDARD_PROPERTY_RESOLVER.resolve(mock_factory_definition)
         assert result.args == [1, "envtestvalue1", 3]
@@ -44,10 +55,12 @@ def test_property_resolver__env(mock_factory_definition):
             "key": "value",
             "key2": "envtestvalue2",
             "key3": "default_value",
+            "key4": "hasavalue",
         }
     finally:
         del os.environ["PROPERTY1"]
         del os.environ["PROPERTY2"]
+        del os.environ["PROPERTY4"]
 
 
 def test_property_resolver__precedence(mock_factory_definition):
@@ -63,6 +76,7 @@ def test_property_resolver__precedence(mock_factory_definition):
                 "key": "value",
                 "key2": "envtestvalue2",
                 "key3": "default_value",
+                "key4": None,
             }
     finally:
         del os.environ["PROPERTY1"]

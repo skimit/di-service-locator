@@ -93,15 +93,19 @@ class PropertyResolver:
         if PropertyResolver._is_property(property_value):
             property_name = property_value[len(PROPERTY_IDENTIFIER) :]
             property_default = None
+            property_default_found = False
             if PROPERTY_DEFAULT_SEPARATOR in property_name:
                 property_name, property_default = property_name.split(
                     PROPERTY_DEFAULT_SEPARATOR, maxsplit=1
                 )
+                property_default_found = True
+                if not property_default:
+                    property_default = None
             for resolver in self._providers:
                 value = resolver(property_name)
                 if value:
                     return value
-            if property_default:
+            if property_default_found:
                 property_value = property_default
             else:
                 raise FeatureConfigError(f"No property value found for {property_value}")
