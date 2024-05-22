@@ -47,7 +47,7 @@ test = "pytest --ruff --ruff-format --cache-clear -ra -v"
 typecheck = "pyright ."
 
 [tool.pyright]
-include = ["di_service_locator"]
+include = ["di_service_locator", "tests"]
 exclude = [  # Do not process these files
     "**/node_modules",
     "**/__pycache__",

@@ -89,7 +89,7 @@ class PropertyResolver:
             PROPERTY_IDENTIFIER
         )
 
-    def _resolve_property(self, property_value: str) -> str:
+    def _resolve_property(self, property_value: str) -> Optional[str]:
         if PropertyResolver._is_property(property_value):
             property_name = property_value[len(PROPERTY_IDENTIFIER) :]
             property_default = None
