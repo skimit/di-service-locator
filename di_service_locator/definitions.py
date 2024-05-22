@@ -8,7 +8,9 @@ import abc
 import dataclasses
 from typing import Collection, Mapping, Sequence, Tuple, Union
 
-Primitives = Union[str, bool, int, float, Collection[str], Collection[int], Collection[float]]
+Primitives = Union[
+    str, bool, int, float, Collection[str], Collection[int], Collection[float], None
+]
 # Type def for supported primitives
 # TODO: dates? timestamps?
 

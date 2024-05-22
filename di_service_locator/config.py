@@ -89,23 +89,47 @@ class PropertyResolver:
             PROPERTY_IDENTIFIER
         )
 
-    def _resolve_property(self, property_value: str) -> str:
+    def _resolve_property(self, property_value: str) -> Optional[str]:
+        """
+        Resolves properties into values.
+
+        The initial value could be one of the following:
+            value            a hardcoded value
+            $VALUE           a property to resolve (mandatory)
+            $VALUE=default   a property to resolve with a default
+            $VALUE=          a property to resolve with a default of None
+
+        :param property_value: the intial property value from the config
+        :type property_value: str
+        :raises FeatureConfigError: if a manadatory property can't be resolved and there is
+            no default
+        :return: the resolved value
+        :rtype: Optional[str]
+        """
+        ret: Optional[str] = property_value
         if PropertyResolver._is_property(property_value):
-            property_name = property_value[len(PROPERTY_IDENTIFIER) :]
+            property_value = property_value.lstrip(PROPERTY_IDENTIFIER)
             property_default = None
-            if PROPERTY_DEFAULT_SEPARATOR in property_name:
-                property_name, property_default = property_name.split(
+            property_default_found = False
+            if PROPERTY_DEFAULT_SEPARATOR in property_value:
+                property_value, property_default = property_value.split(
                     PROPERTY_DEFAULT_SEPARATOR, maxsplit=1
                 )
+                property_default_found = True
+                if not property_default:
+                    property_default = None
             for resolver in self._providers:
-                value = resolver(property_name)
+                value = resolver(property_value)
                 if value:
+                    # early return if we've resolved a property
                     return value
-            if property_default:
-                property_value = property_default
+            if property_default_found:
+                ret = property_default
             else:
-                raise FeatureConfigError(f"No property value found for {property_value}")
-        return property_value
+                raise FeatureConfigError(
+                    f"No property value found for {PROPERTY_IDENTIFIER}{property_value}"
+                )
+        return ret
 
     def resolve(self, factory_definition: FactoryDefinition) -> FactoryDefinition:
         """
