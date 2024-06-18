@@ -32,7 +32,7 @@ pytest-ruff = "^0.2.1"
 ruff = ">=0.1.14,<0.5.0"
 taskipy = "^1.2.0"
 typing-extensions = "^4.9.0"
-urllib3 = "1.26.18"  # Ugly hack to work around poetry bug
+urllib3 = "1.26.19"  # Ugly hack to work around poetry bug
 
 [tool.poetry.extras]
 gcp = ["google-cloud-storage"]
